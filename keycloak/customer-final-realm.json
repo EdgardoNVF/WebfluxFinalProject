@@ -1,0 +1,104 @@
+{
+  "realm": "customer-final",
+  "displayName": "NeoBank - Proyecto final Customer Service",
+  "enabled": true,
+  "sslRequired": "none",
+  "registrationAllowed": false,
+  "resetPasswordAllowed": false,
+  "loginWithEmailAllowed": false,
+  "duplicateEmailsAllowed": false,
+  "accessTokenLifespan": 300,
+  "ssoSessionIdleTimeout": 1800,
+  "roles": {
+    "realm": [
+      {
+        "name": "CUSTOMER_READ",
+        "description": "Consulta de clientes"
+      },
+      {
+        "name": "CUSTOMER_WRITE",
+        "description": "Altas, cambios y bajas de clientes"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "customer-cli-lab",
+      "name": "PowerShell - Proyecto final (solo laboratorio local)",
+      "description": "Direct Access Grants exclusivo para practica académica, nunca producción",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": true,
+      "standardFlowEnabled": false,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": false,
+      "fullScopeAllowed": true,
+      "redirectUris": [],
+      "webOrigins": [],
+      "defaultClientScopes": [
+        "profile",
+        "email",
+        "roles",
+        "web-origins",
+        "acr"
+      ],
+      "protocolMappers": [
+        {
+          "name": "audience-customer-api",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.custom.audience": "customer-api",
+            "access.token.claim": "true",
+            "id.token.claim": "false",
+            "introspection.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "username": "customer-reader",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Customer",
+      "lastName": "Reader",
+      "email": "customer-reader@example.test",
+      "requiredActions": [],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Reader#Final2026!",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "CUSTOMER_READ"
+      ]
+    },
+    {
+      "username": "customer-operator",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Customer",
+      "lastName": "Operator",
+      "email": "customer-operator@example.test",
+      "requiredActions": [],
+      "credentials": [
+        {
+          "type": "password",
+          "value": "Operator#Final2026!",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "CUSTOMER_READ",
+        "CUSTOMER_WRITE"
+      ]
+    }
+  ],
+  "verifyEmail": false
+}
